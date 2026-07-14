@@ -10,6 +10,9 @@ import { Accordion } from "../accordion/accordion";
 
     <app-accordion
      [items]="accordionItems"/>
+     <hr>
+    <app-accordion
+     [items]="newsItems"/>
   `,
   styleUrl: './about-page.css',
 })
@@ -20,6 +23,12 @@ export class AboutPage {
     {title: "Item 2", text:"This is Item 2"},
     {title: "Item 3", text:"This is Item 3"},
     {title: "Item 4", text:"This is Item 4"},
+  ]
+
+  newsItems:AccordionItem[] = [
+    {title:"News 1", text:"News Item 1"},
+    {title:"News 2", text:"News Item 2"},
+    {title:"News 3", text:"News Item 3"},
   ]
 
 
