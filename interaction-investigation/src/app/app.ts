@@ -1,26 +1,23 @@
 import { Component, signal } from '@angular/core';
-import { TitleCasePipe } from '@angular/common';
-import { Counter } from "./counter/counter";
-import { NameEditor } from "./name-editor/name-editor";
-import { Slider } from "./slider/slider";
-import { NameSelector } from "./name-selector/name-selector";
+import { TitleCasePipe, JsonPipe } from '@angular/common';
+import { User } from './models/user';
+import { UserEditor } from "./user-editor/user-editor";
 
 @Component({
   selector: 'app-root',
-  imports: [TitleCasePipe, Counter, NameEditor, Slider, NameSelector],
+  imports: [TitleCasePipe, JsonPipe, UserEditor],
   template: `
     <div>
       <h1>{{ title() | titlecase }}</h1>
-      <!--<button onclick="alert('clicked')">Press Me</button>-->
-      <button (click)="onClick()">Press Me</button>
+
+      @for(user of users; track user.id) {
+        <pt-user-editor [user]="user"></pt-user-editor>
+
+      }
+
       <hr>
-      <app-counter/>
-      <hr>
-      <app-name-editor/>
-      <hr>
-      <app-slider/>
-      <hr>
-      <app-name-selector [names]="names"/>
+      {{ users | json }}
+
     </div>
   `,
   styleUrl: './app.css'
@@ -29,8 +26,20 @@ export class App {
   protected readonly title = signal('interaction investigation');
   count:number = 0;
 
-  names = ['Alice', 'Bob', "Carol", "Dan"];
+  users:User[] = [
+    new User(1, "Alice", "alice@gmail.com", true),
+    new User(2, "Bob", "bob@gmail.com", true),
+    new User(3, "Carol", "carol@gmail.com", false),
+    new User(4, "Dan", "dan@gmail.com", true)
+  ];
 
+
+  names = ['Alice', 'Bob', "Carol", "Dan"];
+  name = signal<string>("");
+
+  onNameSelected(name:string) {
+    this.name.set(name);
+  }
   onClick() {
     alert("proper angular event handler");
   }

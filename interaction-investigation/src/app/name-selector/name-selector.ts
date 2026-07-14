@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-name-selector',
@@ -19,10 +19,13 @@ import { Component, input, signal } from '@angular/core';
 export class NameSelector {
 
   names = input<string[]>();
-  selectedName = signal("");
+  selectedName = signal<string>("");
+
+  nameSelected = output<string>();
 
   onSelected(event:Event) {
     let select = event.target as HTMLInputElement;
     this.selectedName.set(select.value);
+    this.nameSelected.emit(this.selectedName());
   }
 }
