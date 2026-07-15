@@ -5,6 +5,7 @@ import { ContactPage } from './contact-page/contact-page';
 import { UsersPage } from './users-page/users-page';
 import { AdminPage } from './admin-page/admin-page';
 import { UserDetailPage } from './user-detail-page/user-detail-page';
+import { UsersHttpPage } from './users-http-page/users-http-page';
 
 export const routes: Routes = [
   { path: '', title: "Home", component: HomePage },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'users', title: "Users", component: UsersPage },
   { path: 'users/:id', title: "", component: UserDetailPage },
   { path: 'admin', title: "Admin", component: AdminPage },
+  { path: 'users-http', title: "Users Http", component: UsersHttpPage },
   { path: '**', redirectTo: '' }
 ];
