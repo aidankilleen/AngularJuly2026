@@ -4,14 +4,15 @@ import { RouterLink } from "@angular/router";
 import { UsersHttpService } from '../users-http-service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { User } from '../user';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users-http-page',
-  imports: [JsonPipe, AsyncPipe, RouterLink],
+  imports: [JsonPipe, RouterLink, FormsModule],
   template: `
     <h2>Users Http Page</h2>
 
-    <button (click)="onAddUser()">Add User</button>
+    <button (click)="onAddUserClicked()">Add User</button>
     <table>
       <thead>
         <tr>
@@ -29,11 +30,33 @@ import { User } from '../user';
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.active ? "Active" : "Inactive"}}</td>
-            <td><button (click)="onDelete(user.id)">Delete</button></td>
+            <td>
+              <button (click)="onDelete(user.id)">Delete</button>
+              <button (click)="onEditUserClicked(user)">Edit</button>
+            </td>
           </tr>
         }
       </tbody>
     </table>
+
+    @if (showDialog()){
+
+      <div class="dialog">
+        <h3>{{adding() ? "Add User" : "Edit User"}}</h3>
+        Name:<input [(ngModel)]="editingUser().name"><br>
+        Email:<input [(ngModel)]="editingUser().email"><br>
+        Active:<input type="checkbox" [(ngModel)]="editingUser().active"/><br>
+        @if (adding()){
+          <button (click)="onAddUser()">Save</button>
+        } @else {
+          <button (click)="onEditUser()">Update</button>
+        }
+        <button (click)="showDialog.set(false)">Cancel</button>
+
+        <hr>
+        {{ editingUser() | json }}
+      </div>
+    }
   `,
   styleUrl: './users-http-page.css',
 })
@@ -41,20 +64,53 @@ export class UsersHttpPage implements OnInit {
 
   public userService: UsersHttpService = inject(UsersHttpService);
   users = signal<User[]>([]);
+  editingUser = signal<User>({id: -1,
+      name:"",
+      email:"",
+      active:false
+    });
+
+  showDialog = signal<boolean>(false);
+  adding = signal<boolean>(true);
+
+
+
+  ngOnInit():void {
+    // do initialisation here
+    this.userService.getUsers()
+      .subscribe(data=>this.users.set(data));
+  }
+
+  onEditUserClicked(user:User) {
+    this.adding.set(false);
+    this.editingUser.set({...user});
+    this.showDialog.set(true);
+  }
+
+  onEditUser() {
+    this.showDialog.set(false);
+    this.userService.updateUser(this.editingUser())
+      .subscribe(
+        updatedUser => this.users.update(
+          current => current.map(
+            user => user.id != updatedUser.id ? user : updatedUser
+          )
+        )
+      );
+  }
+
+  onAddUserClicked() {
+    this.adding.set(true);
+    this.editingUser.set({id:-1,name:'', email:'', active:false});
+    this.showDialog.set(true)
+  }
 
   onAddUser() {
-    // TODO - get this info from the ui
-    let newUser = {
-      id: -1,
-      name:"NEW USER",
-      email:"new.user@gmail.com",
-      active:false
-    };
-
-    this.userService.addUser(newUser)
-      .subscribe(
+    this.showDialog.set(false);
+    this.userService.addUser(this.editingUser())
+      .subscribe (
         createdUser => this.users.update(
-          current=>current.concat([createdUser])
+          current => current.concat([createdUser])
         )
       );
 
@@ -72,24 +128,4 @@ export class UsersHttpPage implements OnInit {
         });
     }
   }
-  constructor() {
-    // don't use the constructor when initialising things using a service
-    // the sevice hasn't been injected properly yet
-  }
-
-  ngOnInit():void {
-    // do initialisation here
-    this.userService.getUsers()
-      .subscribe(data=>this.users.set(data));
-  }
-
-
-/*
-  users:User[] = [];
-
-  constructor() {
-    this.userService.getUsers()
-      .subscribe(data=>this.users = data);
-  }
-      */
 }

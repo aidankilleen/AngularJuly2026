@@ -15,6 +15,7 @@ import { JsonPipe } from '@angular/common';
       <tr><td>Name</td><td>{{user()?.name}}</td></tr>
       <tr><td>Email</td><td>{{user()?.email}}</td></tr>
       <tr><td>Active</td><td>{{user()?.active ? "Active" : "Inactive"}}</td></tr>
+
     </table>
   } @else {
     <div>

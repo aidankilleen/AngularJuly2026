@@ -2,9 +2,9 @@
   "users": [
     {
       "id": 3,
-      "name": "Carol",
-      "email": "carol@gmail.com",
-      "active": true
+      "name": "Carole",
+      "email": "caroel@gmail.com",
+      "active": false
     },
     {
       "name": "Zoe",
@@ -21,7 +21,7 @@
     {
       "name": "Xavi",
       "email": "xavier@gmail.com",
-      "active": false,
+      "active": true,
       "id": 6
     },
     {
@@ -31,10 +31,22 @@
       "id": 7
     },
     {
+      "name": "Fred",
+      "email": "fred@gmail.com",
+      "active": true,
+      "id": 8
+    },
+    {
+      "name": "Harriet",
+      "email": "harriet@gmail.com",
+      "active": true,
+      "id": 10
+    },
+    {
       "name": "Alice",
       "email": "alice@gmail.com",
       "active": false,
-      "id": 8
+      "id": 11
     }
   ]
 }
