@@ -29,6 +29,6 @@ export class UserDetailPage {
   private route = inject(ActivatedRoute);
   private userService:UserService = inject(UserService);
   userId = this.route.snapshot.paramMap.get("id");
-  user = this.userService.getUser(parseInt(this.userId ? this.userId : "" ));
+  user = this.userService.getUser(parseInt(this.userId ?? "" ));
 
 }
