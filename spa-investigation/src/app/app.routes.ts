@@ -4,12 +4,14 @@ import { AboutPage } from './about-page/about-page';
 import { ContactPage } from './contact-page/contact-page';
 import { UsersPage } from './users-page/users-page';
 import { AdminPage } from './admin-page/admin-page';
+import { UserDetailPage } from './user-detail-page/user-detail-page';
 
 export const routes: Routes = [
   { path: '', title: "Home", component: HomePage },
   { path: 'about', title: "About", component: AboutPage },
   { path: 'contact', title: "Contact", component: ContactPage },
   { path: 'users', title: "Users", component: UsersPage },
+  { path: 'users/:id', title: "", component: UserDetailPage },
   { path: 'admin', title: "Admin", component: AdminPage },
   { path: '**', redirectTo: '' }
 ];
