@@ -14,12 +14,31 @@ export class UsersHttpService {
   public users:User[] = [ ];
 
   constructor() {
-
   }
 
   getUsers():Observable<User[]> {
-
     return this.http.get<User[]>(this.url);
+  }
+
+  getUser(id:number):Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`);
+  }
+
+  deleteUser(id:number):Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`)
+  }
+
+  addUser(user:User):Observable<User> {
+
+    // don't pass an object with id
+    // json-server will assign an id if one is missing
+    let userToAdd = {
+      name:user.name,
+      email:user.email,
+      active:user.active
+    };
+
+    return this.http.post<User>(this.url, userToAdd);
 
   }
 
