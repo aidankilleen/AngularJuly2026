@@ -10,6 +10,8 @@ import { UserDetailHttpPage } from './user-detail-http-page/user-detail-http-pag
 import { UserDialogPage } from './user-dialog-page/user-dialog-page';
 import { PipeInvestigationPage } from './pipe-investigation-page/pipe-investigation-page';
 import { UserDialogDetailPage } from './user-dialog-detail-page/user-dialog-detail-page';
+import { AsyncPipePage } from './async-pipe-page/async-pipe-page';
+import { TemplateVariablePage } from './template-variable-page/template-variable-page';
 
 export const routes: Routes = [
   { path: '', title: "Home", component: HomePage },
@@ -23,5 +25,7 @@ export const routes: Routes = [
   { path: 'user-dialog', title: "Users Dialog", component: UserDialogPage },
   { path: 'user-dialog/:id', title: "", component: UserDialogDetailPage },
   { path: 'pipe-investigation', title: "Pipes", component: PipeInvestigationPage },
+  { path: 'async-pipe', title: "Async Pipe", component: AsyncPipePage },
+  { path: 'template-variable', title: "Template Variables", component: TemplateVariablePage },
   { path: '**', redirectTo: '' }
 ];

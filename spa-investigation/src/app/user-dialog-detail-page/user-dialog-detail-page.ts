@@ -10,7 +10,6 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
     <h2>User Detail {{ userId }}</h2>
 
     @if (user$ | async; as user) {
-
       {{ user.id }}
       {{ user.name }}
       {{ user.email }}
