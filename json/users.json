@@ -37,16 +37,28 @@
       "id": 11
     },
     {
-      "name": "New User",
-      "email": "new.user@gmail.com",
+      "name": "Karen",
+      "email": "karen@gmail.com",
       "active": true,
       "id": 12
     },
     {
-      "name": "New User",
-      "email": "new.user@gmail.com",
-      "active": true,
+      "name": "Liam",
+      "email": "liam@gmail.com",
+      "active": false,
       "id": 13
+    },
+    {
+      "name": "Jane",
+      "email": "jane@gmail.com",
+      "active": false,
+      "id": 14
+    },
+    {
+      "name": "Martina",
+      "email": "martina@gmail.com",
+      "active": true,
+      "id": 15
     }
   ]
 }

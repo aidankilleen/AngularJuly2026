@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output, signal } from '@angular/core';
+import { Component, input, OnChanges, OnInit, output, signal, SimpleChanges } from '@angular/core';
 import { User } from '../user';
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,27 +8,29 @@ import { FormsModule } from '@angular/forms';
   imports: [JsonPipe, FormsModule],
   template: `
     @if (show()) {
-      <div class="dialog">
-        <h2>{{ add() ? "Add" : "Edit" }} User Dialog</h2>
-        Name:<input [(ngModel)]="editingUser().name"><br>
-        Email:<input [(ngModel)]="editingUser().email"><br>
-        Active:<input type="checkbox" [(ngModel)]="editingUser().active"/><br>
+      <div class="modal">
+        <div class="dialog">
+          <h2>{{ add() ? "Add" : "Edit" }} User Dialog</h2>
+          Name:<input [(ngModel)]="editingUser().name"><br>
+          Email:<input [(ngModel)]="editingUser().email"><br>
+          Active:<input type="checkbox" [(ngModel)]="editingUser().active"/><br>
 
-        @if (add()){
-          <button (click)="onAddUser()">Save</button>
-        } @else {
-          <button (click)="onEditUser()">Update</button>
-        }
-        <button (click)="cancel.emit()">Cancel</button>
+          @if (add()){
+            <button (click)="onAddUser()">Save</button>
+          } @else {
+            <button (click)="onEditUser()">Update</button>
+          }
+          <button (click)="cancel.emit()">Cancel</button>
 
-        <hr>
-        {{ editingUser() | json }}
+          <hr>
+          {{ editingUser() | json }}
+        </div>
       </div>
     }
   `,
   styleUrl: './user-dialog.css',
 })
-export class UserDialog implements OnInit {
+export class UserDialog implements OnInit, OnChanges {
 
   show = input.required<boolean>();
   user = input.required<User>();
@@ -41,9 +43,14 @@ export class UserDialog implements OnInit {
     this.save.emit(this.editingUser());
   }
   onEditUser() {
-
+    this.save.emit(this.editingUser());
   }
   ngOnInit(): void {
+    // only gets called once!
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    // gets called every time an input() changes
     this.editingUser.set({...this.user()})
   }
 

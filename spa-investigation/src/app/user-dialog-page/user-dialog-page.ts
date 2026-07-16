@@ -53,10 +53,19 @@ export class UserDialogPage implements OnInit {
 
     } else {
       // editing user
-
+      this.showDialog.set(false);
+      this.userService.updateUser(user)
+        .subscribe(
+          updatedUser => this.users.update(
+            current => current.map(
+              user => user.id != updatedUser.id ? user : updatedUser
+            )
+          )
+        )
     }
   }
   onAdd() {
+    this.editingUser.set({id:-1, name:"", email:"", active:false});
     this.adding.set(true);
     this.showDialog.set(true);
   }
