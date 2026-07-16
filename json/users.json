@@ -1,18 +1,6 @@
 {
   "users": [
     {
-      "id": 3,
-      "name": "Carole",
-      "email": "caroel@gmail.com",
-      "active": false
-    },
-    {
-      "name": "Zoe",
-      "email": "zoe@gmail.com",
-      "active": true,
-      "id": 4
-    },
-    {
       "name": "Yvonne",
       "email": "yvonne@gmail.com",
       "active": true,
@@ -47,6 +35,18 @@
       "email": "alice@gmail.com",
       "active": false,
       "id": 11
+    },
+    {
+      "name": "New User",
+      "email": "new.user@gmail.com",
+      "active": true,
+      "id": 12
+    },
+    {
+      "name": "New User",
+      "email": "new.user@gmail.com",
+      "active": true,
+      "id": 13
     }
   ]
 }

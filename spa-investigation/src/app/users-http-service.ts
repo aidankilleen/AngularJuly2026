@@ -43,6 +43,7 @@ export class UsersHttpService {
   updateUser(user:User): Observable<User> {
     return this.http.put<User>(`${this.url}/${user.id}`, user);
   }
+  
   getUsersOriginal() {
     // HttpClient
     // uses Observables - not promises, doesn't return data directly

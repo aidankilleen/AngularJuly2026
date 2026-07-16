@@ -7,6 +7,7 @@ import { AdminPage } from './admin-page/admin-page';
 import { UserDetailPage } from './user-detail-page/user-detail-page';
 import { UsersHttpPage } from './users-http-page/users-http-page';
 import { UserDetailHttpPage } from './user-detail-http-page/user-detail-http-page';
+import { UserDialogPage } from './user-dialog-page/user-dialog-page';
 
 export const routes: Routes = [
   { path: '', title: "Home", component: HomePage },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'admin', title: "Admin", component: AdminPage },
   { path: 'users-http', title: "Users Http", component: UsersHttpPage },
   { path: 'users-http/:id', title: "", component:  UserDetailHttpPage },
+  { path: 'user-dialog', title: "Users Dialog", component: UserDialogPage },
   { path: '**', redirectTo: '' }
 ];

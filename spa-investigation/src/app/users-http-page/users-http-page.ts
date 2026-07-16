@@ -68,7 +68,7 @@ export class UsersHttpPage implements OnInit {
       name:"",
       email:"",
       active:false
-    });
+  });
 
   showDialog = signal<boolean>(false);
   adding = signal<boolean>(true);
