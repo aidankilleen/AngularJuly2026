@@ -1,0 +1,59 @@
+  <h1>Angular Bootstrap</h1>
+
+    <button
+      class="btn btn-primary"
+      placement="bottom"
+      ngbTooltip="Press Me"
+    >Press Me
+    </button>
+    <hr>
+    <button class="btn btn-secondary">Press Me</button>
+    <button class="btn btn-success">Press Me</button>
+    <button class="btn btn-warning">Press Me</button>
+    <button class="btn btn-danger">Press Me</button>
+
+    <hr>
+
+    <button
+      type="button"
+      class="btn btn-outline-secondary me-2"
+      placement="top"
+      ngbTooltip="Tooltip on top"
+    >
+	    Tooltip on top
+    </button>
+
+    <hr>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4
+          class="modal-title"
+          id="modal-basic-title">
+          Profile update
+        </h4>
+    		<button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+      <div class="modal-body">Body</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="modal.close('Save click')">
+          Save
+        </button>
+      </div>
+
+    </ng-template>
+
+    <button
+      class="btn btn-success"
+      (click)="open(content)"
+    >
+      Open Modal
+    </button>
