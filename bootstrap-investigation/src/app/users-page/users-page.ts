@@ -168,9 +168,7 @@ export class UsersPage implements OnInit {
       current => current.filter(toast=>toast.id != id))
   }
 
-  toasts = signal<{id:number, title:string, message:string}[]>([
-    {id:1, title:"User Deleted",message:"User 1 Deleted"}
-  ]);
+  toasts = signal<{id:number, title:string, message:string}[]>([]);
   userService = inject(UsersHttpService);
   users = signal<User[]>([]);
   modalService = inject(NgbModal);

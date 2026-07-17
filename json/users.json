@@ -23,6 +23,12 @@
       "email": "martina@gmail.com",
       "active": true,
       "id": 15
+    },
+    {
+      "name": "Aidan",
+      "email": "aidan.killeen@gmail.com",
+      "active": false,
+      "id": 16
     }
   ]
 }
