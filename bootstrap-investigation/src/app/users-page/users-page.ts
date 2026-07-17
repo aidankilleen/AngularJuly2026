@@ -1,13 +1,13 @@
 import { Component, inject, OnInit, signal, TemplateRef } from '@angular/core';
 import { UsersHttpService } from '../users-http-service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbTooltip, NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../user';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-users-page',
-  imports: [AsyncPipe, JsonPipe, FormsModule, NgbTooltip],
+  imports: [AsyncPipe, JsonPipe, FormsModule, NgbTooltip, NgbToast],
   template: `
     <h2>Users</h2>
 
@@ -145,11 +145,32 @@ import { FormsModule } from '@angular/forms';
       </div>
     </ng-template>
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        @for(toast of toasts(); track toast.id) {
+          <ngb-toast
+            class="bg-danger text-white"
+            [header]="toast.title"
+            [autohide]="true"
+            [delay]="10000"
+            (hidden)="removeToast(toast.id)"
+          >
+            {{ toast.message }}
+          </ngb-toast>
+        }
+    </div>
   `,
   styleUrl: './users-page.css',
 })
 export class UsersPage implements OnInit {
 
+  removeToast(id:number) {
+    this.toasts.update(
+      current => current.filter(toast=>toast.id != id))
+  }
+
+  toasts = signal<{id:number, title:string, message:string}[]>([
+    {id:1, title:"User Deleted",message:"User 1 Deleted"}
+  ]);
   userService = inject(UsersHttpService);
   users = signal<User[]>([]);
   modalService = inject(NgbModal);
@@ -189,9 +210,15 @@ export class UsersPage implements OnInit {
                 current=>current.filter(user=>user.id!=id)
               )
             );
+          this.showToast("User Deleted", `User ${id} deleted`);
         },
         () => {
         });
+  }
+  showToast(title:string, message:string) {
+    this.toasts.update(
+      current => [...current, {id: current.length+1, title, message}]
+    )
   }
   ngOnInit(): void {
     this.userService.getUsers()

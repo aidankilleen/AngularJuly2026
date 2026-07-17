@@ -1,12 +1,6 @@
 {
   "users": [
     {
-      "name": "Alice",
-      "email": "alice@gmail.com",
-      "active": false,
-      "id": 11
-    },
-    {
       "name": "Karen",
       "email": "karen@gmail.com",
       "active": true,
@@ -29,12 +23,6 @@
       "email": "martina@gmail.com",
       "active": true,
       "id": 15
-    },
-    {
-      "name": "Noreen",
-      "email": "noreen@gmail.com",
-      "active": true,
-      "id": 16
     }
   ]
 }
